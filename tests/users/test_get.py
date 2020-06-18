@@ -10,7 +10,7 @@ PUBLIC_GISTS = 1
 PRIVATE_GISTS = 1
 
 
-class TestGetProject:
+class TestGetUsers:
     def test_valid_get_project_as_owner(self,
                                         github_api: GitHubAPIClient,
                                         existing_gist: Gist):

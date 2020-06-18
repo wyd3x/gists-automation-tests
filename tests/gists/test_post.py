@@ -9,7 +9,7 @@ PRIVATE_GISTS = 1
 
 
 # Right now in this class most tests looks like GET because I don't have access to DB so i depends on get results
-class TestPostValid:
+class TestPostGist:
     def test_valid_post_gist(self,
                              github_api: GitHubAPIClient,
                              existing_gist: Gist):
