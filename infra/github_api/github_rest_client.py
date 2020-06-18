@@ -49,8 +49,14 @@ class GitHubAPIClient:
 
         response = self._session.request(method=method.name, url=url, json=body, headers=headers)
 
+        body = None
+        try:
+            body = response.json()
+        except Exception:
+            body = response.text
+
         result = {
-            'body': response.json(),
+            'body': body,
             'status_code': response.status_code
         }
 

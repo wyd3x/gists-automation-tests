@@ -55,22 +55,23 @@ def generate_gist(files: List[File] = None) -> Gist:
 
 
 @pytest.fixture(scope="function")
-def non_existing_gist(deployment_helper: DeploymentHelper) -> Gist:
+def non_existing_gist(deployment_helper: DeploymentHelper, github_api: GitHubAPIClient) -> Gist:
     gist = generate_gist()
 
     yield gist
 
     if gist.id is not None:
+        github_api.set_auth()
         deployment_helper.delete_gist(gist)
 
 
 @pytest.fixture(scope="function")
-def existing_gist(deployment_helper: DeploymentHelper) -> Gist:
+def existing_gist(deployment_helper: DeploymentHelper, github_api: GitHubAPIClient) -> Gist:
     data = generate_gist()
     gist = deployment_helper.create_gist(data)
 
     print(f"Created Gist: {gist.__dict__}")
 
     yield gist
-
+    github_api.set_auth()
     deployment_helper.delete_gist(gist)

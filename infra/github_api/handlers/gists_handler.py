@@ -27,7 +27,7 @@ class GistsHandler:
         return Gist.from_github(response.get('body'))
 
     def update(self, gist_id: str, gist: Gist) -> Gist:
-        response = self.github_conn.request(method=HTTPMethod.put,
+        response = self.github_conn.request(method=HTTPMethod.patch,
                                             url=f'{GISTS_ROUTE}/{gist_id}',
                                             body=gist.to_github())
         return Gist.from_github(response.get('body'))
@@ -41,14 +41,14 @@ class GistsHandler:
         # TODO!
         return ''
 
-    def star(self, gist_id: str) -> dict:
-        return self.github_conn.request(method=HTTPMethod.put,
-                                        url=f'{GISTS_ROUTE}/{gist_id}/star',
-                                        header={'Content-Length': 0})
+    def star(self, gist_id: str):
+        self.github_conn.request(method=HTTPMethod.put,
+                                 url=f'{GISTS_ROUTE}/{gist_id}/star',
+                                 headers={'content-length': '0'})
 
-    def unstar(self, gist_id: str) -> dict:
-        return self.github_conn.request(method=HTTPMethod.delete,
-                                        url=f'{GISTS_ROUTE}/{gist_id}/star')
+    def unstar(self, gist_id: str):
+        self.github_conn.request(method=HTTPMethod.delete,
+                                 url=f'{GISTS_ROUTE}/{gist_id}/star')
 
     def is_starred(self, gist_id: str) -> bool:
         response = self.github_conn.request(method=HTTPMethod.get,
