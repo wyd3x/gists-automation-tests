@@ -8,6 +8,12 @@ class GistsHandler:
                  github_conn):
         self.github_conn = github_conn
 
+    def read_all(self) -> ['Gist']:
+        response = self.github_conn.request(method=HTTPMethod.get,
+                                            url=GISTS_ROUTE)
+
+        return [Gist.from_github(gist) for gist in response.get('body')]
+
     def read(self, gist_id: str) -> ['Gist']:
         response = self.github_conn.request(method=HTTPMethod.get,
                                             url=f'{GISTS_ROUTE}/{gist_id}')
@@ -28,8 +34,8 @@ class GistsHandler:
 
     def delete(self, gist_id: str) -> dict:
         # TODO: maybe add some implementation
-        return self.github_conn.request(method=HTTPMethod.delete,
-                                        url=f'{GISTS_ROUTE}/{gist_id}')
+        self.github_conn.request(method=HTTPMethod.delete,
+                                 url=f'{GISTS_ROUTE}/{gist_id}')
 
     def get_preview_revision(self):
         # TODO!
@@ -47,6 +53,5 @@ class GistsHandler:
     def is_starred(self, gist_id: str) -> bool:
         response = self.github_conn.request(method=HTTPMethod.get,
                                             url=f'{GISTS_ROUTE}/{gist_id}/star')
-        if response.get('status_code') == 204:
-            return True
-        return False
+
+        return True if response.get('status_code') == 204 else False

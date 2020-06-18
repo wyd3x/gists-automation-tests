@@ -55,8 +55,4 @@ class File:
 
     def __eq__(self, other: 'File') -> bool:
         return self.filename == other.filename \
-            and self.truncated == other.truncated \
-            and self.language == other.language \
-            and self.raw_url == other.raw_url \
-            and self.content == other.content \
-            and self.type == other.type
+            and self.content == other.content

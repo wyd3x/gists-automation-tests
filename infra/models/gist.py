@@ -58,9 +58,9 @@ class Gist:
                     updated_at=data.get('updated_at',))
 
     def __eq__(self, other: 'Gist') -> bool:
+        # comparision updated_at removed because github sometimes change it after creating for some reason
         return self.id == other.id \
             and self.files == other.files \
-            and self.updated_at == other.updated_at \
             and self.description == other.description \
             and self.public == other.public \
             and self.url == other.url \

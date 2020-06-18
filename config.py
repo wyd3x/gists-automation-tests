@@ -2,28 +2,28 @@ import os
 
 
 class BaseConfig:
-    GITHUB_API = ''
     TOKEN = ''
+    GITHUB_API = ''
 
 
 class TestConfig(BaseConfig):
-    GITHUB_API = 'https://api.github.com'
     TOKEN = os.environ['GITHUB_TOKEN']
+    GITHUB_API = 'https://api.github.com'
 
 
 class DevConfig(BaseConfig):
-    GITHUB_API = 'https://api.dev.github.com'
     TOKEN = os.environ['GITHUB_TOKEN']
+    GITHUB_API = 'https://api.dev.github.com'
 
 
 class ProdConfig(BaseConfig):
-    GITHUB_API = 'https://api.github.com'
     TOKEN = os.environ['GITHUB_TOKEN']
+    GITHUB_API = 'https://api.github.com'
 
 
 class LocalConfig(DevConfig):
-    GITHUB_API = 'https://api.github.com'
     TOKEN = os.environ['GITHUB_TOKEN']
+    GITHUB_API = 'https://api.github.com'
 
 
 CONFIG = {
