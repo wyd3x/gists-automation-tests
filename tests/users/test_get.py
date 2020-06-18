@@ -37,7 +37,6 @@ class TestGetUsers:
         pub_gists += 1
 
         assert pub_gists == len(github_gists)
-        # TODO: fix files compare cz github return content null
         assert github_gists[0] == gist
 
     def test_valid_get_max_per_page_as_owner(self,

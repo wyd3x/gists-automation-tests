@@ -32,13 +32,16 @@ class GistsHandler:
                                             body=gist.to_github())
         return Gist.from_github(response.get('body'))
 
-    def delete(self, gist_id: str) -> dict:
-        # TODO: maybe add some implementation
+    def delete(self, gist_id: str):
         self.github_conn.request(method=HTTPMethod.delete,
                                  url=f'{GISTS_ROUTE}/{gist_id}')
 
-    def get_preview_revision(self):
-        # TODO!
+    def get_preview_revision(self, gist_id):
+        response = self.github_conn.request(method=HTTPMethod.get,
+                                 url=f'{GISTS_ROUTE}/{gist_id}')
+
+        gist = Gist.from_github(response.get('body'))
+
         return ''
 
     def star(self, gist_id: str):

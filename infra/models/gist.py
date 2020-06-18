@@ -11,15 +11,17 @@ class Gist:
                  files: List[File],
                  id: str = None,
                  url: str = None,
+                 history: List[dict] = None,
                  created_at: datetime = None,
                  updated_at: datetime = None,):
         self.id = id
         self.url = url
-        self.public = public
-        self.created_at = created_at
-        self.description = description
         self.files = files
+        self.public = public
+        self.history = history
+        self.created_at = created_at
         self.updated_at = updated_at
+        self.description = description
 
     def to_github(self):
         files_list = {}
@@ -53,6 +55,7 @@ class Gist:
                     url=data.get('url'),
                     files=files,
                     public=data.get('public'),
+                    history=data.get('history'),
                     created_at=data.get('created_at'),
                     description=data.get('description'),
                     updated_at=data.get('updated_at',))
